@@ -98,11 +98,14 @@ func (h *userHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 	user, err = h.userUsecase.Create(ctx, user)
 	if err != nil {
+		utils.RenderInternalServerError(w, err)
 		return
 	}
 	jsonBytes, err := json.Marshal(user)
 	if err != nil {
 		log.Printf("json marshal error: %+v\n", err)
+		utils.RenderInternalServerError(w, err)
+		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
@@ -134,6 +137,7 @@ func (h *userHandler) Update(w http.ResponseWriter, r *http.Request) {
 	err = decoder.Decode(&param)
 	if err != nil {
 		log.Println("body decode failed")
+		utils.RenderInternalServerError(w, err)
 		return
 	}
 	user := &model.User{
@@ -143,6 +147,7 @@ func (h *userHandler) Update(w http.ResponseWriter, r *http.Request) {
 
 	err = h.userUsecase.Update(ctx, user)
 	if err != nil {
+		utils.RenderInternalServerError(w, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
@@ -154,11 +159,13 @@ func (h *userHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 	userID, err := strconv.ParseUint(chi.URLParam(r, "userID"), 10, 64)
 	if err != nil {
+		utils.RenderBadRequest(w)
 		return
 	}
 
 	err = h.userUsecase.Delete(ctx, userID)
 	if err != nil {
+		utils.RenderInternalServerError(w, err)
 		return
 	}
 	w.Header().Set("Content-Type", "application/json")
