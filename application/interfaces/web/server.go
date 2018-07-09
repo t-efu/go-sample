@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/sample/application/repository"
 	"github.com/sample/application/usecase"
@@ -10,12 +11,12 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/sample/application/constant"
 	"github.com/sample/application/interfaces/web/handler"
 )
 
 func main() {
-	db, err := gorm.Open("mysql", constant.MysqlConnectInfo)
+	endpoint := os.Getenv("DB_CONNECT_INFO")
+	db, err := gorm.Open("mysql", endpoint)
 	if err != nil {
 		log.Panic("failed database connect.err:", err)
 	}

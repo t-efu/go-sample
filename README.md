@@ -1,6 +1,8 @@
 # go-practice
 
+## start
 docker-compose up -d  
-docker-compose exec db bash
+export DB_CONNECT_INFO="root:root@/test?charset=utf8&parseTime=True&loc=Local"
 
-``` # MySQL login ```
+## db
+docker-compose exec db bash  
