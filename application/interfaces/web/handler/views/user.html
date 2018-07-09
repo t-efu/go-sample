@@ -1,0 +1,22 @@
+{{ define "content" }}
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>名前</th>
+      <th>作成日時</th>
+      <th>更新日時</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{ range $i, $user := .Users }}
+    <tr>
+      <td>{{ $user.ID }}</td>
+      <td>{{ $user.Name }}</td>
+      <td>{{ $user.CreatedAt }}</td>
+      <td>{{ $user.UpdatedAt }}</td>
+    </tr>
+  {{ end }}
+  </tbody>
+</table>
+{{ end }}
