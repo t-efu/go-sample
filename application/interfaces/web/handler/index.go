@@ -22,15 +22,9 @@ func NewIndexHandler() IndexHandler {
 }
 
 func (h *indexHandler) Get(w http.ResponseWriter, r *http.Request) {
-	tpl, err := template.ParseFiles(path+"index.html", path+"layout.html")
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte("internal server error"))
-		log.Println(err)
-		return
-	}
+	tpl := template.Must(template.ParseFiles(path+"base.html", path+"index.html"))
 	message := "sample message"
-	err = tpl.ExecuteTemplate(w, "content", map[string]interface{}{
+	err := tpl.ExecuteTemplate(w, "base", map[string]interface{}{
 		"Message": message,
 	})
 	if err != nil {

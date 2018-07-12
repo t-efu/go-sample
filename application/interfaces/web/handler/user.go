@@ -32,12 +32,12 @@ func (h *userHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tpl, err := template.ParseFiles(path+"index.html", path+"user.html")
+	tpl, err := template.ParseFiles(path+"base.html", path+"user.html")
 	if err != nil {
 		utils.RenderInternalServerError(w, err)
 		return
 	}
-	err = tpl.ExecuteTemplate(w, "content", map[string]interface{}{
+	err = tpl.ExecuteTemplate(w, "base", map[string]interface{}{
 		"Users": users,
 	})
 	if err != nil {
