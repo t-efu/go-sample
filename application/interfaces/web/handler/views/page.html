@@ -1,0 +1,12 @@
+{{ define "page" }}
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      {{ template "menu" . }}
+    </div>
+    <div class="column is-9">
+      {{ template "content" . }}
+    </div>
+  </div>
+</div>
+{{ end }}

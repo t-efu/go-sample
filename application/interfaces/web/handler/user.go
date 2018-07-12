@@ -32,7 +32,7 @@ func (h *userHandler) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tpl, err := template.ParseFiles(path+"base.html", path+"user.html")
+	tpl, err := template.ParseFiles(path+"base.html", path+"page.html", path+"menu.html", path+"user.html")
 	if err != nil {
 		utils.RenderInternalServerError(w, err)
 		return

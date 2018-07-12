@@ -22,7 +22,7 @@ func NewIndexHandler() IndexHandler {
 }
 
 func (h *indexHandler) Get(w http.ResponseWriter, r *http.Request) {
-	tpl := template.Must(template.ParseFiles(path+"base.html", path+"index.html"))
+	tpl := template.Must(template.ParseFiles(path+"base.html", path+"page.html", path+"menu.html", path+"index.html"))
 	message := "sample message"
 	err := tpl.ExecuteTemplate(w, "base", map[string]interface{}{
 		"Message": message,
