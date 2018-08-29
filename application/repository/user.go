@@ -33,7 +33,7 @@ func (r *userRepository) Get(ctx context.Context, id uint64) (*model.User, error
 		if err == gorm.ErrRecordNotFound {
 			return nil, nil
 		}
-		return nil, err
+		return nil, errors.Wrap(err, "failed get user")
 	}
 	return user, nil
 }
@@ -42,7 +42,7 @@ func (r *userRepository) Find(ctx context.Context) ([]model.User, error) {
 	users := make([]model.User, 5)
 	err := r.Conn.Find(&users).Error
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed find users")
 	}
 	return users, nil
 }
