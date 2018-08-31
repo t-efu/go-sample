@@ -55,7 +55,7 @@ func (u *userUsecase) Create(ctx context.Context, user *model.User) (*model.User
 func (u *userUsecase) Update(ctx context.Context, user *model.User) error {
 	err := u.userRepository.Update(ctx, user)
 	if err != nil {
-		return errors.Wrap(err, "failed upadte user")
+		return errors.Wrap(err, "failed update user")
 	}
 	return nil
 }
